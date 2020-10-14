@@ -21,9 +21,15 @@ digit [0-9]
 
        }
 
-[-+*\n] return *yytext;
+[-+*/()\n] return *yytext;
 mem {return MEM;}
 sin {return SIN;}
+cos {return COS;}
+tan {return TAN;}
+log {return LOG;}
+cot {return COT;}
+cosec {return COSEC;}
+sec {return SEC;}
 
 [\t] ;
 
