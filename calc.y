@@ -20,9 +20,13 @@ double memvar;
 %token<dval>NUMBER
 %type<dval>E
 %token<dval>MEM
-%token SIN COS TAN COT SEC COSEC LOG
+%token SIN COS TAN COT SEC COSEC LOG LN ASEC ASIN ACOS ATAN ACOSEC ACOT SQRT
 
 
+%left '(' ')'
+%left '+' '-'
+%left '*' '/'
+%right '^'
 
 %%
 
@@ -36,16 +40,27 @@ statement:MEM'='E {memvar=$3;}
 
 E: NUMBER {$$ = $1; }
    |E'/'E {if($3==0) { flag1=1; yyerror();} else $$ = $1 / $3;} 
+   |'('E')' {$$ = $2; }
+   |'-'E {$$ = (-1) * $2; }
    | E'+'E {$$ = $1 + $3; }
    | E'-'E {$$ = $1 - $3; }
    | E'*'E {$$ = $1 * $3; }
-   | SIN'('E')' {$$ = sin($2); }
+   | SIN'('E')' {$$ = sin($3); }
    | COS'('E')' {$$ = cos($3); }
    | TAN'('E')' {$$ = cos($3); }
    | COT'('E')' {$$ = 1/tan($3); }
    | COSEC'('E')' {$$ = 1/sin($3); }
    | SEC'('E')' {$$ = 1/cos($3); }
    | LOG'('E')' {$$ = log($3); }
+   | ASIN'('E')' {$$ = asin($3); }
+   | ACOS'('E')' {$$ = acos($3); }
+   | ATAN'('E')' {$$ = acos($3); }
+   | ACOT'('E')' {$$ = 1/atan($3); }
+   | ACOSEC'('E')' {$$ = 1/asin($3); }
+   | ASEC'('E')' {$$ = 1/acos($3); }
+   | SQRT'('E')' {$$ = sqrt($3); }
+   | E'^'E {$$ = pow($1,$3); }
+   | E'%'E {$$ = (int)$1 % (int)$3; }
    ;
 
 %%
