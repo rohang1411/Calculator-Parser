@@ -21,7 +21,9 @@ digit [0-9]
 
        }
 
+
 [-+*%^/()\n] return *yytext;
+
 mem {return MEM;}
 sin {return SIN;}
 cos {return COS;}
@@ -38,6 +40,7 @@ acot {return ACOT;}
 acosec {return ACOSEC;}
 asec {return ASEC;}
 sqrt {return SQRT;}
+
 
 [\t] ;
 

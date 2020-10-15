@@ -22,6 +22,7 @@ double memvar;
 %token<dval>MEM
 %token SIN COS TAN COT SEC COSEC LOG LN ASEC ASIN ACOS ATAN ACOSEC ACOT SQRT
 
+
 %left '(' ')'
 %left '+' '-'
 %left '*' '/'
@@ -61,6 +62,7 @@ E: NUMBER {$$ = $1; }
    | E'^'E {$$ = pow($1,$3); }
    | E'%'E {$$ = (int)$1 % (int)$3; }
    ;
+
 %%
 
 
